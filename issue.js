@@ -140,6 +140,6 @@ module.exports = {
 	get,
 	update: mustBeSignedIn(update),
 	delete: mustBeSignedIn(remove),
-	counts,
 	restore: mustBeSignedIn(restore),
+	counts,
 };

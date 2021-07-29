@@ -18,7 +18,7 @@ installHandler(app);
 // console.log('CORS setting:', enableCors);
 // server.applyMiddleware({ app, path: '/graphql', cors: enableCors });
 
-const port = process.env.API_SERVER_PORT || 3000;
+const port = process.env.PORT || 3000;
 (async function start() {
 	try {
 		await connectToDb();
