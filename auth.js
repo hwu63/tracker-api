@@ -8,6 +8,7 @@ const cors = require('cors');
 let { JWT_SECRET } = process.env;
 
 if (!JWT_SECRET) {
+  console.log(JWT_SECRET);
   if (process.env.NODE_ENV !== 'production') {
     JWT_SECRET = 'tempjwtsecretfordevonly';
     console.log('Missing env var JWT_SECRET. Using unsafe dev secret');
@@ -63,13 +64,17 @@ routes.post('/signin', async (req, res) => {
   res.cookie('jwt', token, {
     httpOnly: true,
     domain: process.env.COOKIE_DOMAIN,
+    sameSite: 'none',
+    secure: true,
   });
 
   res.json(credentials);
 });
 
 routes.post('/signout', async (req, res) => {
-  res.clearCookie('jwt');
+  res.clearCookie('jwt', {
+    domain: process.env.COOKIE_DOMAIN,
+  });
   res.json({ status: 'ok' });
 });
 
